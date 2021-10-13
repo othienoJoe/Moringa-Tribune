@@ -13,7 +13,7 @@ import os
 import django_heroku
 import dj_database_url
 from pathlib import Path
-from decouple import config, Csv
+# from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-baz6u9trqsy^9q(@f4%=be&+v062b+dht@#-*ka16o15e_58z2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
 # development
 ALLOWED_HOSTS = ['tribunol.herokuapp.com']
 
