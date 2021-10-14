@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Article
-from .forms import NewsLetterForm, forms
+from .forms import NewsLetterForm, NewArticleForm
 from .email import send_welcome_email
 import datetime as dt
 
@@ -41,12 +41,19 @@ def past_days_news(request, past_date):
     return render(request, 'all-news/past-news.html',{"date": date,"news":news})
     
 @login_required(login_url='/accounts/login/')
-def article(request,article_id):
-    try:
-        article = Article.objects.get(id = article_id)
-    except DoesNotExist:
-        raise Http404()
-    return render(request,"all-news/article.html", {"article":article})
+def new_article(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            article = form.save(commit=False)
+            article.editor = current_user
+            article.save()
+        return redirect('NewsToday')
+
+    else:
+        form = NewArticleForm()
+    return render(request, 'new_article.html', {"form": form})
 
 def search_results(request):
     if 'article' in request.GET and request.GET["article"]:
