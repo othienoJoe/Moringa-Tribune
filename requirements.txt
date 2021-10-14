@@ -2,7 +2,7 @@ asgiref==3.4.1
 beautifulsoup4==4.10.0
 confusable-homoglyphs==3.2.0
 dj-database-url==0.5.0
-Django==1.11.29
+Django==3.2.8
 django-bootstrap3==15.0.0
 django-bootstrap5==2.1.2
 django-heroku==0.3.1
