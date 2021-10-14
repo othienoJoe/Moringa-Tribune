@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import datetime as dt
 
 # Create your models here.
@@ -28,8 +29,7 @@ class Article(models.Model):
 	editor = models.ForeignKey(Editor, on_delete=models.CASCADE,)
 	tags = models.ManyToManyField(tags)
 	pub_date = models.DateTimeField(auto_now_add=True)
-	article_image = models.ImageField(upload_to = 'articles/')
-
+	article_image = models.ImageField(upload_to = 'articles/', blank = True)
 
 	@classmethod
 	def search_by_title(cls,search_term):
